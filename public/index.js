@@ -17,6 +17,7 @@
     console.log( "canvas:", canvas );
     var context = canvas.getContext( '2d' );
     console.log( "context:", context );
+    var colorPicker = document.querySelector( '#color-picker' );
 
     canvas.onmousedown = function( ev ) {
       console.log( "onmousedown" );
@@ -34,7 +35,13 @@
         drawCircle( context, ev.layerX, ev.layerY, 100 );
       }
     };
+
+    colorPicker.onchange = function( ev ){
+      context.strokeStyle = this.value;
+    };
+
   };
+
 
   window.onload = app;
 
