@@ -1,26 +1,27 @@
 (function() {
 
   var drawing = false;
+  var brushSize = 25;
+
+  var drawCircle = function( context, x, y, radius ) {
+    console.log( "drawCircle called");
+    context.beginPath();
+    context.moveTo( x + radius, y );
+    context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
+    context.fill();
+  };
+
+  var degToRad = function( degrees ) {
+    return ( degrees * Math.PI ) / 180;
+  };
 
   var app = function() {
-
-    var degToRad = function( degrees ) {
-      return ( degrees * Math.PI ) / 180;
-    };
-
-    var drawCircle = function( context, x, y, radius ) {
-      console.log( "drawCircle called");
-      context.beginPath();
-      context.moveTo( x + radius, y );
-      context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
-      context.fill();
-    };
-
     var canvas = document.querySelector( '#main-canvas' );
     console.log( "canvas:", canvas );
     var context = canvas.getContext( '2d' );
     console.log( "context:", context );
     var colorPicker = document.querySelector( '#color-picker' );
+    var brushSize = document.querySelector( '#brush-size');
 
     canvas.onmousedown = function( ev ) {
       console.log( "onmousedown" );
@@ -35,12 +36,18 @@
     canvas.onmousemove = function( ev ) {
       // console.log( "mousemove" );
       if ( drawing ) {
-        drawCircle( context, ev.layerX, ev.layerY, 100 );
+        drawCircle( context, ev.layerX, ev.layerY, brushSize );
       }
     };
 
     colorPicker.onchange = function( ev ){
       context.fillStyle = this.value;
+    };
+
+    brushSize.value = 25;
+
+    brushSize.onchange = function( ev ){
+      brushSize = this.value; 
     };
 
   };
