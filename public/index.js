@@ -2,17 +2,20 @@
 
   var drawing = false;
 
-  var drawCircle = function( context, x, y, radius ) {
-    context.moveTo( x + radius, y );
-    context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
-    context.fill();
-  };
-
-  var degToRad = function( degrees ) {
-    return ( degrees * Math.PI ) / 180;
-  };
-
   var app = function() {
+
+    var degToRad = function( degrees ) {
+      return ( degrees * Math.PI ) / 180;
+    };
+
+    var drawCircle = function( context, x, y, radius ) {
+      console.log( "drawCircle called");
+      context.beginPath();
+      context.moveTo( x + radius, y );
+      context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
+      context.fill();
+    };
+
     var canvas = document.querySelector( '#main-canvas' );
     console.log( "canvas:", canvas );
     var context = canvas.getContext( '2d' );
