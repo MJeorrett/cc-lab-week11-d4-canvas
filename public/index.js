@@ -1,10 +1,7 @@
 (function() {
 
-  var drawing = false;
-  var brushSize = 25;
-
   var drawCircle = function( context, x, y, radius ) {
-    console.log( "drawCircle called");
+
     context.beginPath();
     context.moveTo( x + radius, y );
     context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
@@ -16,12 +13,16 @@
   };
 
   var app = function() {
+
+    var drawing = false;
+    var brushSize = 25;
+
     var canvas = document.querySelector( '#main-canvas' );
     console.log( "canvas:", canvas );
     var context = canvas.getContext( '2d' );
     console.log( "context:", context );
     var colorPicker = document.querySelector( '#color-picker' );
-    var brushSize = document.querySelector( '#brush-size');
+    var brushSizePicker = document.querySelector( '#brush-size');
 
     canvas.onmousedown = function( ev ) {
       console.log( "onmousedown" );
@@ -44,10 +45,10 @@
       context.fillStyle = this.value;
     };
 
-    brushSize.value = 25;
+    brushSizePicker.value = 25;
 
-    brushSize.onchange = function( ev ){
-      brushSize = this.value; 
+    brushSizePicker.onchange = function( ev ){
+      brushSize = parseFloat( this.value );
     };
 
   };
