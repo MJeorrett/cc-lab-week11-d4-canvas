@@ -5,7 +5,7 @@
   var drawCircle = function( context, x, y, radius ) {
     context.moveTo( x + radius, y );
     context.arc(x, y, radius, degToRad( 0 ), degToRad( 360 ) );
-    context.stroke();
+    context.fill();
   };
 
   var degToRad = function( degrees ) {
@@ -37,7 +37,7 @@
     };
 
     colorPicker.onchange = function( ev ){
-      context.strokeStyle = this.value;
+      context.fillStyle = this.value;
     };
 
   };
